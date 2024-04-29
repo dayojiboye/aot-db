@@ -1,0 +1,265 @@
+@font-face {
+  font-family: Moderat-Regular;
+  src: url('../fonts/Moderat-Regular.ttf');
+}
+
+@font-face {
+  font-family: Moderat-Medium;
+  src: url('../fonts/Moderat-Medium.ttf');
+}
+
+@font-face {
+  font-family: Moderat-Bold;
+  src: url('../fonts/Moderat-Bold.ttf');
+}
+
+@font-face {
+  font-family: Millik;
+  src: url('../fonts/Millik.otf');
+}
+
+*,
+::before,
+::after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+}
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  tab-size: 4;
+  font-feature-settings: normal;
+  font-optical-sizing: auto;
+  font-variation-settings: 'slnt' 0;
+}
+
+html[data-resizing='true'] *[data-transition='true'] {
+  transition: none 0s ease 0s !important;
+}
+
+@media (min-width: 1921px) {
+  html {
+    background-color: rgba(147, 144, 144, 0.1);
+    height: 100%;
+    width: 100%;
+  }
+}
+
+html._fixed,
+body._fixed {
+  touch-action: none;
+  -webkit-overflow-scrolling: none;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  width: 100%;
+  height: 100%;
+  overscroll-behavior-y: none;
+  line-height: inherit;
+  font-family: Moderat-Regular;
+  color: #fff;
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
+    rgb(var(--background-start-rgb));
+}
+
+@layer base {
+  @font-face {
+    font-family: 'Millik';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../fonts/Millik.otf') format('otf');
+  }
+  @font-face {
+    font-family: 'Moderat-Medium';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../fonts/Moderat-Medium.ttf') format('otf');
+  }
+  @font-face {
+    font-family: 'Moderat-Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../fonts/Moderat-Bold.ttf') format('otf');
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+dl,
+dd,
+hr,
+figure,
+pre {
+  line-height: 1.4;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+p {
+  font-size: 16px;
+}
+
+ul,
+ol,
+li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block;
+  vertical-align: middle;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* video {
+	clip-path: inset(1px 1px);
+} */
+
+img {
+  object-fit: cover;
+}
+
+a {
+  outline: none;
+  font-family: inherit;
+  /* white-space: nowrap; */
+  text-decoration: none;
+  color: inherit;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+[type='button'],
+[type='reset'],
+[type='submit'],
+button {
+  -webkit-appearance: button;
+  appearance: button;
+  background-color: transparent;
+  background-image: none;
+}
+
+[role='button'],
+button {
+  cursor: pointer;
+}
+
+button {
+  outline: none;
+  font: inherit;
+  color: inherit;
+  border: none;
+  font-size: 16px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+label {
+  display: block;
+}
+
+input:not([type='radio']),
+input:not([type='checkbox']),
+select,
+textarea {
+  -webkit-appearance: none;
+  appearance: none;
+  font-family: inherit;
+  outline: none;
+  color: inherit;
+}
+
+input:not([type='radio']):read-only,
+input:not([type='checkbox']):read-only {
+  cursor: default;
+}
+
+input::placeholder,
+select::placeholder,
+textarea::placeholder {
+  color: #ccc;
+}
+
+input[type='checkbox'] {
+  -webkit-appearance: checkbox;
+  appearance: checkbox;
+}
+
+input[type='radio'] {
+  -webkit-appearance: radio;
+  appearance: radio;
+  border-radius: 50% !important;
+}
+
+select {
+  cursor: pointer;
+}

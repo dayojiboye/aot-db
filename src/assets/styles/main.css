@@ -1,0 +1,24 @@
+@import './base.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#app {
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+.hide-scroll-bar {
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scroll-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-translate3d {
+  transform: translate3d(0px, 0px, 0px);
+}
