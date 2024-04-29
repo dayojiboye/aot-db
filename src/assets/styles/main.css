@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.btn-primary {
+  @apply flex items-center justify-center gap-[10px] py-3 px-[30px] rounded-sm bg-slate-500 text-white font-moderat-medium text-sm sm:text-base h-[50px] w-[192px] whitespace-nowrap hover:bg-slate-600 transition-all;
+}
+
 #app {
   max-width: 1920px;
   margin: 0 auto;

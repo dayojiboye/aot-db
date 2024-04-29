@@ -1,5 +1,5 @@
 <template>
-  <RouterLink :to="to" class="hover:text-gray-400 text-base">
+  <RouterLink :to="to" class="font-moderat-bold hover:text-gray-400 text-base">
     {{ label }}
   </RouterLink>
 </template>

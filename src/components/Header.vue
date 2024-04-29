@@ -5,7 +5,7 @@
   >
     <RouterLink to="/" class="font-millik text-xl block">AOT-DB</RouterLink>
 
-    <nav class="flex gap-4 flex-1 justify-end sm:justify-center [&>a]:font-moderat-bold">
+    <nav class="flex gap-4 flex-1 justify-end sm:justify-center">
       <NavLink to="/titans" label="Titans" />
     </nav>
   </header>

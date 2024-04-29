@@ -13,9 +13,10 @@ export default {
 
 <template>
   <HeaderComponent />
-  <main role="main" class="mt-20 px-4">
+  <main role="main" class="mt-20 px-4 w-full">
     <RouterView />
   </main>
+  <!-- To-Do: Add footer -->
 </template>
 
 <style scoped></style>
