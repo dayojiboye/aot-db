@@ -1,0 +1,5 @@
+export const VIEW_STATUS = {
+  LOADING: 'LOADING',
+  SUCCESS: 'SUCCESS',
+  ERROR: 'ERROR'
+}

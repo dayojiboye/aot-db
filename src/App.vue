@@ -13,7 +13,7 @@ export default {
 
 <template>
   <HeaderComponent />
-  <main role="main" class="mt-20 px-4 w-full">
+  <main role="main" class="mt-20 px-4 w-full pb-12 max-w-[1024px] mx-auto">
     <RouterView />
   </main>
   <!-- To-Do: Add footer -->
