@@ -2,12 +2,16 @@
   <div class="w-full pt-8">
     <h1 class="font-millik text-2xl sm:text-3xl">Characters</h1>
 
+    <CustomInput hasIcon v-model="text" :attr="attr" class="mt-3">
+      <template #icon>
+        <SearchIcon />
+      </template>
+    </CustomInput>
+
     <ErrorPanel v-if="currentView === status.ERROR" class="mt-20" @onRetry="fetchAllCharacters" />
 
-    <div v-else-if="currentView === status.SUCCESS">
-      <div
-        class="w-full mt-12 grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] lg:grid-cols-4 gap-5"
-      >
+    <div v-else-if="currentView === status.SUCCESS" class="mt-12 w-full">
+      <div class="w-full grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] lg:grid-cols-4 gap-5">
         <CharacterCard
           v-for="character in characters"
           :key="character.id"
@@ -40,6 +44,8 @@ import { VIEW_STATUS } from '@/utils/enums'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
 import ErrorPanel from '@/components/ErrorPanel.vue'
 import CharacterCard from '@/components/CharacterCard.vue'
+import CustomInput from '@/components/CustomInput.vue'
+import SearchIcon from '../assets/icons/search-icon.svg?component'
 
 const getAllCharacters = apiEndpoints.getAllCharacters
 
@@ -47,7 +53,9 @@ export default {
   components: {
     LoadingSpinner,
     ErrorPanel,
-    CharacterCard
+    CharacterCard,
+    CustomInput,
+    SearchIcon
   },
 
   data() {
@@ -56,7 +64,13 @@ export default {
       status: VIEW_STATUS,
       currentView: VIEW_STATUS.LOADING,
       page: 1,
-      pageInfo: {}
+      pageInfo: {},
+      text: '',
+      attr: {
+        type: 'text',
+        placeholder: 'Search...',
+        id: 'search-character'
+      }
     }
   },
 
