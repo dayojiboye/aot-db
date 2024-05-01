@@ -80,6 +80,7 @@ export default {
       //   name: ''
       // },
       page: 1,
+      name: '',
       searchAtrributes: {
         type: 'text',
         placeholder: 'Search',
@@ -89,13 +90,13 @@ export default {
   },
 
   methods: {
-    async fetchAllCharacters(name) {
+    async fetchAllCharacters() {
       this.currentView = VIEW_STATUS.LOADING
       try {
         const response = await api.get(getAllCharacters, {
           params: {
             page: this.page,
-            name: name || undefined
+            name: this.name || undefined
           }
         })
         const { status, data } = response || {}
@@ -121,7 +122,8 @@ export default {
 
   created() {
     this.onSearch = debounce((value) => {
-      this.fetchAllCharacters(value)
+      this.name = value
+      this.fetchAllCharacters()
     }, 500)
   },
 
