@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-[200vh]">
+  <div class="w-full">
     <ErrorPanel v-if="currentView === status.ERROR" @onRetry="fetchCharacter" />
 
     <div v-else-if="currentView === status.SUCCESS" class="w-full">
@@ -9,6 +9,7 @@
           class="fixed z-[8px] top-20 left-0 h-11 w-full py-4 bg-dark border-b border-b-border px-4 flex items-center gap-3"
         >
           <img
+            v-if="details.img"
             :alt="details.name"
             :src="details.img ? details.img.split('.png')[0] + '.png' : ''"
             width="300"
@@ -19,19 +20,109 @@
         </div>
       </Transition>
 
-      <div class="w-full px-4 py-4 flex flex-col md:flex-row gap-6">
-        <div class="w-[280px] flex gap-4 items-center" id="profile-avatar">
+      <div class="w-full px-4 py-8 flex flex-col md:flex-row gap-8 md:gap-12 items-start">
+        <div class="w-[280px] flex gap-4 items-center flex-shrink-0" id="profile-avatar">
           <img
+            v-if="details.img"
             :alt="details.name"
             :src="details.img ? details.img.split('.png')[0] + '.png' : ''"
             width="600"
             height="600"
             class="rounded-[50%] w-28 h-28 lg:w-36 lg:h-36"
           />
+          <span
+            v-else
+            class="rounded-[50%] w-28 h-28 lg:w-36 lg:h-36 text-2xl lg:text-3xl flex items-center justify-center bg-slate-500"
+            >{{ getInitial(details.name) }}</span
+          >
           <h1 class="text-lg font-millik leading-6">{{ details.name }}</h1>
         </div>
 
-        <div></div>
+        <!-- flex flex-col gap-7 -->
+        <div
+          class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-7 sm:gap-10 md:grid-cols-2 lg:grid-cols-3"
+        >
+          <CharacterDetail title="Aliases">
+            <p class="text-base lg:text-lg font-moderat-medium">
+              {{ details.alias.map((alias) => alias).join(', ') }}
+            </p>
+          </CharacterDetail>
+
+          <CharacterDetail title="Species">
+            <p class="text-base lg:text-lg font-moderat-medium">
+              {{ details.species.map((specie) => specie).join(', ') }}
+            </p>
+          </CharacterDetail>
+
+          <CharacterDetail title="Gender">
+            <p class="text-base lg:text-lg font-moderat-medium">
+              {{ details.gender }}
+            </p>
+          </CharacterDetail>
+
+          <CharacterDetail title="Age">
+            <p class="text-base lg:text-lg font-moderat-medium">
+              {{ details.age }}
+            </p>
+          </CharacterDetail>
+
+          <CharacterDetail title="Height">
+            <p class="text-base lg:text-lg font-moderat-medium">
+              {{ details.height }}
+            </p>
+          </CharacterDetail>
+
+          <CharacterDetail title="Relatives">
+            <p v-if="details.relatives[0]" class="text-base lg:text-lg font-moderat-medium">
+              {{ details.relatives[0].family }}
+            </p>
+          </CharacterDetail>
+
+          <CharacterDetail title="Birthplace">
+            <p class="text-base lg:text-lg font-moderat-medium">
+              {{ details.birthplace }}
+            </p>
+          </CharacterDetail>
+
+          <CharacterDetail title="Residence">
+            <p class="text-base lg:text-lg font-moderat-medium">
+              {{ details.residence }}
+            </p>
+          </CharacterDetail>
+
+          <CharacterDetail title="Status">
+            <p class="text-base lg:text-lg font-moderat-medium">
+              {{ details.status }}
+            </p>
+          </CharacterDetail>
+
+          <CharacterDetail title="Occupation">
+            <p class="text-base lg:text-lg font-moderat-medium">
+              {{ details.occupation }}
+            </p>
+          </CharacterDetail>
+
+          <CharacterDetail title="Groups">
+            <div v-for="group in details.groups" :key="group">
+              <h3 class="text-lg lg:text-xl font-millik">{{ group.name }}</h3>
+              <p class="text-base lg:text-lg font-moderat-medium">
+                {{ group.sub_groups.map((subgroup) => subgroup).join(', ') }}
+              </p>
+            </div>
+          </CharacterDetail>
+
+          <CharacterDetail title="Roles">
+            <ul>
+              <li
+                v-for="role in details.roles"
+                :key="role"
+                class="text-base lg:text-lg font-moderat-medium list-disc list-inside"
+              >
+                {{ role }}
+              </li>
+            </ul>
+          </CharacterDetail>
+        </div>
       </div>
     </div>
 
@@ -46,13 +137,16 @@ import { VIEW_STATUS } from '@/utils/enums'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
 import ErrorPanel from '@/components/ErrorPanel.vue'
 import _ from 'lodash'
+import CharacterDetail from '@/components/CharacterDetail.vue'
+import { getCharacterInitial } from '@/utils/helpers'
 
 const getCharacter = apiEndpoints.getCharacter
 
 export default {
   components: {
     LoadingSpinner,
-    ErrorPanel
+    ErrorPanel,
+    CharacterDetail
   },
 
   data() {
@@ -87,11 +181,15 @@ export default {
         profileAvatar?.offsetTop + profileAvatar?.offsetHeight
       ) {
         this.showStickyHeader = true
-        profileAvatar.classList.add('opacity-0')
+        profileAvatar?.classList.add('opacity-0')
       } else {
         this.showStickyHeader = false
-        profileAvatar.classList.remove('opacity-0')
+        profileAvatar?.classList.remove('opacity-0')
       }
+    },
+
+    getInitial(name) {
+      return getCharacterInitial(name)
     }
   },
 
