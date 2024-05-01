@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full pt-8">
+  <div class="w-full pt-8 px-4">
     <h1 class="font-millik text-2xl sm:text-3xl">Characters</h1>
 
     <CustomInput @update:modelValue="onSearch" :attr="searchAtrributes" class="mt-5">
@@ -8,7 +8,7 @@
       </template>
     </CustomInput>
 
-    <ErrorPanel v-if="currentView === status.ERROR" class="mt-20" @onRetry="fetchAllCharacters" />
+    <ErrorPanel v-if="currentView === status.ERROR" @onRetry="fetchAllCharacters" />
 
     <div v-else-if="currentView === status.SUCCESS" class="mt-8 w-full">
       <div

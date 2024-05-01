@@ -1,4 +1,5 @@
 export default {
   getAllCharacters: '/characters',
-  getAllTitans: '/titans'
+  getAllTitans: '/titans',
+  getCharacter: (id) => `/characters/${id}`
 }

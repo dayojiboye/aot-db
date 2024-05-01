@@ -2,6 +2,7 @@ import HomeViewVue from '@/views/HomeView.vue'
 import TitansViewVue from '@/views/TitansView.vue'
 import NotFoundViewVue from '@/views/NotFoundView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
+import CharacterViewVue from '@/views/CharacterView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,6 +16,11 @@ const router = createRouter({
       path: '/titans',
       name: 'titans',
       component: TitansViewVue
+    },
+    {
+      path: '/character/:id',
+      name: 'character-details',
+      component: CharacterViewVue
     },
     {
       path: '/:pathMatch(.*)*',

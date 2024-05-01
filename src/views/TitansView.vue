@@ -1,8 +1,8 @@
 <template>
-  <div class="w-full pt-8">
+  <div class="w-full pt-8 px-4">
     <h1 class="font-millik text-2xl sm:text-3xl">Titans</h1>
 
-    <ErrorPanel v-if="currentView === status.ERROR" class="mt-20" @onRetry="fetchAllTitans" />
+    <ErrorPanel v-if="currentView === status.ERROR" @onRetry="fetchAllTitans" />
 
     <div v-else-if="currentView === status.SUCCESS" class="mt-8 w-full">
       <div v-if="titansData.results && titansData.results.length > 0" class="w-full">
