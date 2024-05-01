@@ -10,10 +10,10 @@
 
     <input
       v-bind="attr"
-      :value="value"
-      @input="handleInput($event.target.value)"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
       class="border-border border rounded-sm w-full h-10 bg-transparent px-3 py-2 text-base"
-      :class="[inputClass && inputClass, hasIconSlot() && 'pl-9']"
+      :class="[inputClass && inputClass, hasIconSlot() && 'pl-10']"
     />
   </div>
 </template>
@@ -22,19 +22,11 @@
 export default {
   name: 'CustomInput',
 
-  props: ['value', 'attr', 'inputClass'],
+  props: ['attr', 'inputClass', 'modelValue'],
 
-  data() {
-    return {
-      content: this.value
-    }
-  },
+  emits: ['update:modelValue'],
 
   methods: {
-    handleInput(value) {
-      this.$emit('input', value)
-    },
-
     hasIconSlot() {
       return !!this.$slots.icon
     }

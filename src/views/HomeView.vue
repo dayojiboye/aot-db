@@ -2,7 +2,7 @@
   <div class="w-full pt-8">
     <h1 class="font-millik text-2xl sm:text-3xl">Characters</h1>
 
-    <CustomInput hasIcon v-model="text" :attr="attr" class="mt-3">
+    <CustomInput @update:modelValue="onSearch" :attr="searchAtrributes" class="mt-3">
       <template #icon>
         <SearchIcon />
       </template>
@@ -10,26 +10,37 @@
 
     <ErrorPanel v-if="currentView === status.ERROR" class="mt-20" @onRetry="fetchAllCharacters" />
 
-    <div v-else-if="currentView === status.SUCCESS" class="mt-12 w-full">
-      <div class="w-full grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] lg:grid-cols-4 gap-5">
-        <CharacterCard
-          v-for="character in characters"
-          :key="character.id"
-          :name="character.name"
-          :imageUrl="character.img ? character.img.split('.png')[0] + '.png' : ''"
-          :id="character.id"
-        />
+    <div v-else-if="currentView === status.SUCCESS" class="mt-8 w-full">
+      <div
+        v-if="charactersData.results && charactersData.results.length > 0"
+        class="flex flex-col gap-12"
+      >
+        <div
+          class="w-full grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] lg:grid-cols-4 gap-5"
+        >
+          <CharacterCard
+            v-for="character in charactersData.results"
+            :key="character.id"
+            :name="character.name"
+            :imageUrl="character.img ? character.img.split('.png')[0] + '.png' : ''"
+            :id="character.id"
+          />
+        </div>
+
+        <div class="flex justify-end">
+          <vue-awesome-paginate
+            :total-items="charactersData.info.pages"
+            :items-per-page="1"
+            :max-pages-shown="1"
+            v-model="page"
+            prevButtonContent="Prev"
+            nextButtonContent="Next"
+          />
+        </div>
       </div>
 
-      <div class="mt-12 flex justify-end">
-        <vue-awesome-paginate
-          :total-items="pageInfo.pages"
-          :items-per-page="1"
-          :max-pages-shown="1"
-          v-model="page"
-          prevButtonContent="Prev"
-          nextButtonContent="Next"
-        />
+      <div v-else>
+        <p class="text-center text-lg text-muted">No character found</p>
       </div>
     </div>
 
@@ -46,6 +57,7 @@ import ErrorPanel from '@/components/ErrorPanel.vue'
 import CharacterCard from '@/components/CharacterCard.vue'
 import CustomInput from '@/components/CustomInput.vue'
 import SearchIcon from '../assets/icons/search-icon.svg?component'
+import { debounce } from '@/utils/helpers'
 
 const getAllCharacters = apiEndpoints.getAllCharacters
 
@@ -60,33 +72,35 @@ export default {
 
   data() {
     return {
-      characters: [],
+      charactersData: {},
       status: VIEW_STATUS,
       currentView: VIEW_STATUS.LOADING,
+      // params: {
+      //   page: 1,
+      //   name: ''
+      // },
       page: 1,
-      pageInfo: {},
-      text: '',
-      attr: {
+      searchAtrributes: {
         type: 'text',
-        placeholder: 'Search...',
+        placeholder: 'Search',
         id: 'search-character'
       }
     }
   },
 
   methods: {
-    async fetchAllCharacters() {
+    async fetchAllCharacters(name) {
       this.currentView = VIEW_STATUS.LOADING
       try {
         const response = await api.get(getAllCharacters, {
           params: {
-            page: this.page
+            page: this.page,
+            name: name || undefined
           }
         })
         const { status, data } = response || {}
         if (status === 200) {
-          this.characters = data.results
-          this.pageInfo = data.info
+          this.charactersData = data
           this.currentView = VIEW_STATUS.SUCCESS
         }
       } catch (err) {
@@ -95,15 +109,32 @@ export default {
     }
   },
 
-  beforeMount() {
-    this.fetchAllCharacters()
+  // beforeCreate() {
+  //   this.debouncedFetch = debounce(() => {
+  //     this.fetchAllCharacters()
+  //   }, 500)
+  // },
+
+  created() {
+    this.onSearch = debounce((value) => {
+      this.fetchAllCharacters(value)
+    }, 500)
   },
 
   watch: {
-    page(newPage, oldPage) {
-      if (newPage !== oldPage) {
+    // params: {
+    //   handler() {
+    //     this.debouncedFetch()
+    //   },
+    //   deep: true,
+    //   immediate: true
+    // }
+
+    page: {
+      handler() {
         this.fetchAllCharacters()
-      }
+      },
+      immediate: true
     }
   }
 }
