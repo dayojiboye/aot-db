@@ -14,6 +14,7 @@
             :key="titan.id"
             :name="titan.name"
             :imageUrl="titan.img ? titan.img.split('.png')[0] + '.png' : ''"
+            @onClick="goToTitan(titan.id)"
           />
         </div>
       </div>
@@ -65,6 +66,10 @@ export default {
       } catch (err) {
         this.currentView = VIEW_STATUS.ERROR
       }
+    },
+
+    goToTitan(id) {
+      this.$router.push(`/titan/${id}`)
     }
   },
 

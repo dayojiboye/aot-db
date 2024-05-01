@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <ErrorPanel v-if="currentView === status.ERROR" @onRetry="fetchCharacter" />
+    <ErrorPanel v-if="currentView === status.ERROR" @onRetry="fetchTitan" />
 
     <div v-else-if="currentView === status.SUCCESS" class="w-full">
       <Transition name="slide-fade">
@@ -38,31 +38,12 @@
           <h1 class="text-lg font-millik leading-6">{{ details.name }}</h1>
         </div>
 
-        <!-- flex flex-col gap-7 -->
         <div
-          class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-7 sm:gap-10 md:grid-cols-2 lg:grid-cols-3"
+          class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-7 sm:gap-10 md:grid-cols-2"
         >
-          <CharacterDetail title="Aliases">
+          <CharacterDetail title="Abilities">
             <p class="text-base lg:text-lg font-moderat-medium">
-              {{ details.alias.map((alias) => alias).join(', ') }}
-            </p>
-          </CharacterDetail>
-
-          <CharacterDetail title="Species">
-            <p class="text-base lg:text-lg font-moderat-medium">
-              {{ details.species.map((specie) => specie).join(', ') }}
-            </p>
-          </CharacterDetail>
-
-          <CharacterDetail title="Gender">
-            <p class="text-base lg:text-lg font-moderat-medium">
-              {{ details.gender }}
-            </p>
-          </CharacterDetail>
-
-          <CharacterDetail title="Age">
-            <p class="text-base lg:text-lg font-moderat-medium">
-              {{ details.age }}
+              {{ details.abilities.map((ability) => ability).join(', ') }}
             </p>
           </CharacterDetail>
 
@@ -72,55 +53,10 @@
             </p>
           </CharacterDetail>
 
-          <CharacterDetail title="Relatives">
-            <p v-if="details.relatives[0]" class="text-base lg:text-lg font-moderat-medium">
-              {{ details.relatives[0].family }}
-            </p>
-          </CharacterDetail>
-
-          <CharacterDetail title="Birthplace">
+          <CharacterDetail title="Allegiance">
             <p class="text-base lg:text-lg font-moderat-medium">
-              {{ details.birthplace }}
+              {{ details.allegiance }}
             </p>
-          </CharacterDetail>
-
-          <CharacterDetail title="Residence">
-            <p class="text-base lg:text-lg font-moderat-medium">
-              {{ details.residence }}
-            </p>
-          </CharacterDetail>
-
-          <CharacterDetail title="Status">
-            <p class="text-base lg:text-lg font-moderat-medium">
-              {{ details.status }}
-            </p>
-          </CharacterDetail>
-
-          <CharacterDetail title="Occupation">
-            <p class="text-base lg:text-lg font-moderat-medium">
-              {{ details.occupation }}
-            </p>
-          </CharacterDetail>
-
-          <CharacterDetail title="Groups">
-            <div v-for="group in details.groups" :key="group">
-              <h3 class="text-lg lg:text-xl font-millik">{{ group.name }}</h3>
-              <p class="text-base lg:text-lg font-moderat-medium">
-                {{ group.sub_groups.map((subgroup) => subgroup).join(', ') }}
-              </p>
-            </div>
-          </CharacterDetail>
-
-          <CharacterDetail title="Roles">
-            <ul>
-              <li
-                v-for="role in details.roles"
-                :key="role"
-                class="text-base lg:text-lg font-moderat-medium"
-              >
-                {{ role }}
-              </li>
-            </ul>
           </CharacterDetail>
         </div>
       </div>
@@ -144,7 +80,7 @@ import _ from 'lodash'
 import CharacterDetail from '@/components/CharacterDetail.vue'
 import { getCharacterInitial } from '@/utils/helpers'
 
-const getCharacter = apiEndpoints.getCharacter
+const getTitan = apiEndpoints.getTitan
 
 export default {
   components: {
@@ -163,10 +99,10 @@ export default {
   },
 
   methods: {
-    async fetchCharacter() {
+    async fetchTitan() {
       this.currentView = VIEW_STATUS.LOADING
       try {
-        const response = await api.get(getCharacter(this.$route.params.id))
+        const response = await api.get(getTitan(this.$route.params.id))
         const { status, data } = response || {}
         if (status === 200) {
           this.details = data
@@ -202,7 +138,7 @@ export default {
   },
 
   created() {
-    this.fetchCharacter()
+    this.fetchTitan()
   },
 
   updated() {
