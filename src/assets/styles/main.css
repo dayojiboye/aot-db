@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 .btn-primary {
-  @apply flex items-center justify-center gap-2 py-3 px-[30px] rounded-sm bg-slate-500 text-white font-moderat-medium text-sm sm:text-base h-[46px] sm:h-[50px] w-[192px] whitespace-nowrap hover:bg-slate-600 transition-all;
+  @apply flex items-center justify-center gap-2 py-3 px-[30px] rounded-[4px] bg-[#17394f] border border-[#21638e] text-white font-moderat-medium text-sm sm:text-base h-[46px] sm:h-[50px] w-[192px] whitespace-nowrap transition-all;
 }
 
 #app {
