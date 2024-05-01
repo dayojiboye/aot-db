@@ -1,8 +1,8 @@
 <template>
   <div
     role="button"
-    class="border border-border rounded-[4px] py-5 px-4 flex gap-4 items-center"
-    @click="goToCharacter"
+    class="border border-border rounded-[4px] py-5 px-4 flex gap-4 items-center hover:ring-dark hover:shadow-dark hover:shadow-md hover:ring-1"
+    @click="$emit('onClick')"
   >
     <img
       v-if="imageUrl"
@@ -29,16 +29,10 @@ export default {
 
   props: {
     name: String,
-    imageUrl: String,
-    // age: [Number, String],
-    id: Number
+    imageUrl: String
   },
 
   methods: {
-    goToCharacter() {
-      this.$router.push(`/character/${this.id}`)
-    },
-
     getInitial(name) {
       return getCharacterInitial(name)
     }

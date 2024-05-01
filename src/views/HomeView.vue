@@ -2,7 +2,7 @@
   <div class="w-full pt-8">
     <h1 class="font-millik text-2xl sm:text-3xl">Characters</h1>
 
-    <CustomInput @update:modelValue="onSearch" :attr="searchAtrributes" class="mt-3">
+    <CustomInput @update:modelValue="onSearch" :attr="searchAtrributes" class="mt-5">
       <template #icon>
         <SearchIcon />
       </template>
@@ -23,7 +23,7 @@
             :key="character.id"
             :name="character.name"
             :imageUrl="character.img ? character.img.split('.png')[0] + '.png' : ''"
-            :id="character.id"
+            @onClick="goToCharacter(character.id)"
           />
         </div>
 
@@ -106,6 +106,10 @@ export default {
       } catch (err) {
         this.currentView = VIEW_STATUS.ERROR
       }
+    },
+
+    goToCharacter(id) {
+      this.$router.push(`/character/${id}`)
     }
   },
 
