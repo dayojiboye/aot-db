@@ -2,13 +2,13 @@
   <div class="w-full pt-8 px-4">
     <h1 class="font-millik text-2xl sm:text-3xl">Characters</h1>
 
-    <CustomInput @update:modelValue="onSearch" :attr="searchAtrributes" class="mt-5">
+    <custom-input @update:modelValue="onSearch" :attr="searchAtrributes" class="mt-5">
       <template #icon>
         <SearchIcon />
       </template>
-    </CustomInput>
+    </custom-input>
 
-    <ErrorPanel v-if="currentView === status.ERROR" @onRetry="fetchAllCharacters" />
+    <error-panel v-if="currentView === status.ERROR" @onRetry="fetchAllCharacters" />
 
     <div v-else-if="currentView === status.SUCCESS" class="mt-8 w-full">
       <div
@@ -18,7 +18,7 @@
         <div
           class="w-full grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] lg:grid-cols-4 gap-5"
         >
-          <CharacterCard
+          <character-card
             v-for="character in charactersData.results"
             :key="character.id"
             :name="character.name"
@@ -44,7 +44,7 @@
       </div>
     </div>
 
-    <LoadingSpinner v-else />
+    <loading-spinner v-else />
   </div>
 </template>
 

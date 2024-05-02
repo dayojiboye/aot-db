@@ -2,14 +2,14 @@
   <div class="w-full pt-8 px-4">
     <h1 class="font-millik text-2xl sm:text-3xl">Titans</h1>
 
-    <ErrorPanel v-if="currentView === status.ERROR" @onRetry="fetchAllTitans" />
+    <error-panel v-if="currentView === status.ERROR" @onRetry="fetchAllTitans" />
 
     <div v-else-if="currentView === status.SUCCESS" class="mt-8 w-full">
       <div v-if="titansData.results && titansData.results.length > 0" class="w-full">
         <div
           class="w-full grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] lg:grid-cols-3 gap-5"
         >
-          <CharacterCard
+          <character-card
             v-for="titan in titansData.results"
             :key="titan.id"
             :name="titan.name"
@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <LoadingSpinner v-else />
+    <loading-spinner v-else />
   </div>
 </template>
 

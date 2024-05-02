@@ -25,7 +25,7 @@
 import { getCharacterInitial } from '@/utils/helpers'
 
 export default {
-  name: 'CharacterCard',
+  name: 'character-card',
 
   props: {
     name: String,

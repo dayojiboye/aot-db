@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <ErrorPanel v-if="currentView === status.ERROR" @onRetry="fetchCharacter" />
+    <error-panel v-if="currentView === status.ERROR" @onRetry="fetchCharacter" />
 
     <div v-else-if="currentView === status.SUCCESS" class="w-full">
       <Transition name="slide-fade">
@@ -42,76 +42,76 @@
         <div
           class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-7 sm:gap-10 md:grid-cols-2 lg:grid-cols-3"
         >
-          <CharacterDetail title="Aliases">
+          <character-detail title="Aliases">
             <p class="text-base lg:text-lg font-moderat-medium">
               {{ details.alias.map((alias) => alias).join(', ') }}
             </p>
-          </CharacterDetail>
+          </character-detail>
 
-          <CharacterDetail title="Species">
+          <character-detail title="Species">
             <p class="text-base lg:text-lg font-moderat-medium">
               {{ details.species.map((specie) => specie).join(', ') }}
             </p>
-          </CharacterDetail>
+          </character-detail>
 
-          <CharacterDetail title="Gender">
+          <character-detail title="Gender">
             <p class="text-base lg:text-lg font-moderat-medium">
               {{ details.gender }}
             </p>
-          </CharacterDetail>
+          </character-detail>
 
-          <CharacterDetail title="Age">
+          <character-detail title="Age">
             <p class="text-base lg:text-lg font-moderat-medium">
               {{ details.age }}
             </p>
-          </CharacterDetail>
+          </character-detail>
 
-          <CharacterDetail title="Height">
+          <character-detail title="Height">
             <p class="text-base lg:text-lg font-moderat-medium">
               {{ details.height }}
             </p>
-          </CharacterDetail>
+          </character-detail>
 
-          <CharacterDetail title="Relatives">
+          <character-detail title="Relatives">
             <p v-if="details.relatives[0]" class="text-base lg:text-lg font-moderat-medium">
               {{ details.relatives[0].family }}
             </p>
-          </CharacterDetail>
+          </character-detail>
 
-          <CharacterDetail title="Birthplace">
+          <character-detail title="Birthplace">
             <p class="text-base lg:text-lg font-moderat-medium">
               {{ details.birthplace }}
             </p>
-          </CharacterDetail>
+          </character-detail>
 
-          <CharacterDetail title="Residence">
+          <character-detail title="Residence">
             <p class="text-base lg:text-lg font-moderat-medium">
               {{ details.residence }}
             </p>
-          </CharacterDetail>
+          </character-detail>
 
-          <CharacterDetail title="Status">
+          <character-detail title="Status">
             <p class="text-base lg:text-lg font-moderat-medium">
               {{ details.status }}
             </p>
-          </CharacterDetail>
+          </character-detail>
 
-          <CharacterDetail title="Occupation">
+          <character-detail title="Occupation">
             <p class="text-base lg:text-lg font-moderat-medium">
               {{ details.occupation }}
             </p>
-          </CharacterDetail>
+          </character-detail>
 
-          <CharacterDetail title="Groups">
+          <character-detail title="Groups">
             <div v-for="group in details.groups" :key="group">
               <h3 class="text-lg lg:text-xl font-millik">{{ group.name }}</h3>
               <p class="text-base lg:text-lg font-moderat-medium">
                 {{ group.sub_groups.map((subgroup) => subgroup).join(', ') }}
               </p>
             </div>
-          </CharacterDetail>
+          </character-detail>
 
-          <CharacterDetail title="Roles">
+          <character-detail title="Roles">
             <ul>
               <li
                 v-for="role in details.roles"
@@ -121,12 +121,12 @@
                 {{ role }}
               </li>
             </ul>
-          </CharacterDetail>
+          </character-detail>
         </div>
       </div>
     </div>
 
-    <LoadingSpinner v-else />
+    <loading-spinner v-else />
 
     <div class="px-4">
       <button class="btn-primary" @click="goBack">Go back</button>

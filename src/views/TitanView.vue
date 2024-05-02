@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <ErrorPanel v-if="currentView === status.ERROR" @onRetry="fetchTitan" />
+    <error-panel v-if="currentView === status.ERROR" @onRetry="fetchTitan" />
 
     <div v-else-if="currentView === status.SUCCESS" class="w-full">
       <Transition name="slide-fade">
@@ -41,28 +41,28 @@
         <div
           class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-7 sm:gap-10 md:grid-cols-2"
         >
-          <CharacterDetail title="Abilities">
+          <character-detail title="Abilities">
             <p class="text-base lg:text-lg font-moderat-medium">
               {{ details.abilities.map((ability) => ability).join(', ') }}
             </p>
-          </CharacterDetail>
+          </character-detail>
 
-          <CharacterDetail title="Height">
+          <character-detail title="Height">
             <p class="text-base lg:text-lg font-moderat-medium">
               {{ details.height }}
             </p>
-          </CharacterDetail>
+          </character-detail>
 
-          <CharacterDetail title="Allegiance">
+          <character-detail title="Allegiance">
             <p class="text-base lg:text-lg font-moderat-medium">
               {{ details.allegiance }}
             </p>
-          </CharacterDetail>
+          </character-detail>
         </div>
       </div>
     </div>
 
-    <LoadingSpinner v-else />
+    <loading-spinner v-else />
 
     <div class="px-4">
       <button class="btn-primary" @click="goBack">Go back</button>

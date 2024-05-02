@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'ErrorPanel'
+  name: 'error-panel'
 }
 </script>
 

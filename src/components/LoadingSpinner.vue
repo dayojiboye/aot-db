@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  name: 'LoadingSpinner'
+  name: 'loading-spinner'
 }
 </script>
 

@@ -7,8 +7,8 @@
     <span class="font-millik text-2xl block">AOT-DB</span>
 
     <nav class="flex gap-4 flex-1 justify-end sm:justify-center">
-      <NavLink to="/" label="Home" />
-      <NavLink to="/titans" label="Titans" />
+      <nav-link to="/" label="Home" />
+      <nav-link to="/titans" label="Titans" />
     </nav>
   </header>
 </template>

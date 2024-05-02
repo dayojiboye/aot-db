@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'CharacterDetail',
+  name: 'character-detail',
 
   props: ['title']
 }

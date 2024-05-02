@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: 'CustomInput',
+  name: 'custom-input',
 
   props: ['attr', 'inputClass', 'modelValue'],
 
